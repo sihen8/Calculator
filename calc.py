@@ -1,12 +1,11 @@
-def is_integer(n):
+def is_float(n):
     try:
         float(n)
+        return(True)
     except ValueError:
         return False
-    else:
-        return float(n).is_integer()
 
-def format_equation(equation):
+def strToList(equation):
 
     equation_list = []
     number = False
@@ -22,11 +21,11 @@ def format_equation(equation):
         #print()
         #TEST
 
-        if is_integer(equation[i]) == True:
-            if number == True:
-                equation_list[len(equation_list) - 1] = int(str(last_term) + str(equation[i]))
+        if is_float(equation[i]) == True:
+            if number == True:                
+                equation_list[len(equation_list) - 1] = str(last_term) + str(equation[i])
             else:
-                equation_list.append(int(equation[i]))
+                equation_list.append(str(equation[i]))
 
             number = True
             last_term = str(last_term) + str(equation[i])
@@ -35,19 +34,31 @@ def format_equation(equation):
             equation_list.append(equation[i])
             last_term = ""
             number = False
-
-    print(equation_list)
-    for i in equation_list:
-        if equation_list[i] == ".":
-            equation_list[i - 1] = str(equation_list[i - 1]) + "." + str(equation_list[i + 1])
-            equation_list.pop(i)
-            equation_list.pop(i)
     return equation_list
 
+def floatify(equation_list):
+    things_to_delete = 0
+    for i in range(len(equation_list)):
+        if equation_list[i] == ".":
+            equation_list[i - 1] = equation_list[i - 1] + "." + equation_list[i + 1]
+            equation_list[i] = "DELETE THIS"
+            equation_list[i + 1] = "DELETE THIS"
+            things_to_delete += 2
 
-print(format_equation("1.25"))
+    counter = 0
+    while things_to_delete != 0:
+        if equation_list[counter] == "DELETE THIS":
+            equation_list.pop(counter)
+            counter -= 1
+            things_to_delete -= 1
+        counter += 1
 
+    for i in range(len(equation_list)):
+        if is_float(equation_list[i]) == True:
+            equation_list[i] = float(equation_list[i])
+    return equation_list
 
+    
 
 
 
@@ -99,3 +110,8 @@ def simplify(equation_list):
         counter += 1
     return(equation_list)
 
+def solve_this(equation):
+    equation_list = strToList(equation)
+    equation_list = floatify(equation_list)
+    answer = simplify(equation_list)
+    return answer

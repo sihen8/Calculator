@@ -6,11 +6,10 @@ def makeText(str):
     return text
 
 def getEquation(event):
-    equation = equation_input.get()
-    equation = format_equation(equation)
-    simplify(equation)
+    expression = equation_input.get()
+    expression = solve_this(expression)
     equation_input.delete(0, END)
-    equation_input.insert(0, equation)
+    equation_input.insert(0, expression)
 
 window = Tk()
 window.title("Calculator")
@@ -31,3 +30,4 @@ solve.pack()
 equation = solve.bind("<Button-1>", getEquation)
 
 window.mainloop()
+print(1)
