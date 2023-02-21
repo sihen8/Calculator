@@ -58,14 +58,16 @@ def floatify(equation_list):
             equation_list[i] = float(equation_list[i])
     return equation_list
 
-    
-
-
 
 def simplify(equation_list):
     pemdas = 0
     counter = 0
     while len(equation_list) != 1:
+
+        #print("pemdas: " + str(pemdas))
+        #print("counter: " + str(counter))
+        #print(equation_list)
+        #print()
 
         if equation_list[counter] == '(':
             parenthesis = []
@@ -78,6 +80,8 @@ def simplify(equation_list):
             equation_list.insert(counter, parenthesis)
             equation_list.pop(counter - 1)
             equation_list.pop(counter)
+            counter = 0
+        
 
         if equation_list[counter] == '^' and pemdas == 1:
             equation_list[counter - 1] = equation_list[counter - 1] ** equation_list[counter + 1]
@@ -115,3 +119,10 @@ def solve_this(equation):
     equation_list = floatify(equation_list)
     answer = simplify(equation_list)
     return answer
+
+x = strToList("100/(5+5)")
+#print(x)
+x = floatify(x)
+#print(x)
+x = simplify(x)
+print(x)
