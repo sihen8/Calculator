@@ -46,12 +46,13 @@ def floatify(equation_list):
             things_to_delete += 2
 
     for i in range(len(equation_list)):
+        print(equation_list)
         if equation_list[i] == "-":
             if i == 0:
                 equation_list[i] = "-" + equation_list[i + 1]
                 equation_list[i + 1] = "DELETE THIS"
                 things_to_delete += 1
-            elif isFloat(equation_list[i - 1]) == False:
+            elif isFloat(equation_list[i - 1]) == False and equation_list[i - 1] != "DELETE THIS":
                 equation_list[i] = "-" + equation_list[i + 1]
                 equation_list[i + 1] = "DELETE THIS"
                 things_to_delete += 1
@@ -134,9 +135,9 @@ def solve_this(equation):
     answer = simplify(equation_list)
     return answer
 
-#x = strToList("-10/(-99+10)")
+x = strToList("-10/(-99-1)")
 #print(x)
-#x = floatify(x)
+x = floatify(x)
 #print(x)
-#x = simplify(x)
-#print(x)
+x = simplify(x)
+print(x)
