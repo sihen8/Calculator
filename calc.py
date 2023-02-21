@@ -1,4 +1,4 @@
-def is_float(n):
+def isFloat(n):
     try:
         float(n)
         return(True)
@@ -21,7 +21,7 @@ def strToList(equation):
         #print()
         #TEST
 
-        if is_float(equation[i]) == True:
+        if isFloat(equation[i]) == True:
             if number == True:                
                 equation_list[len(equation_list) - 1] = str(last_term) + str(equation[i])
             else:
@@ -45,6 +45,20 @@ def floatify(equation_list):
             equation_list[i + 1] = "DELETE THIS"
             things_to_delete += 2
 
+    for i in range(len(equation_list)):
+        if equation_list[i] == "-":
+            if i == 0:
+                equation_list[i] = "-" + equation_list[i + 1]
+                equation_list[i + 1] = "DELETE THIS"
+                things_to_delete += 1
+            elif isFloat(equation_list[i - 1]) == False:
+                equation_list[i] = "-" + equation_list[i + 1]
+                equation_list[i + 1] = "DELETE THIS"
+                things_to_delete += 1
+
+
+
+
     counter = 0
     while things_to_delete != 0:
         if equation_list[counter] == "DELETE THIS":
@@ -54,7 +68,7 @@ def floatify(equation_list):
         counter += 1
 
     for i in range(len(equation_list)):
-        if is_float(equation_list[i]) == True:
+        if isFloat(equation_list[i]) == True:
             equation_list[i] = float(equation_list[i])
     return equation_list
 
@@ -120,9 +134,9 @@ def solve_this(equation):
     answer = simplify(equation_list)
     return answer
 
-x = strToList("100/(5+5)")
+#x = strToList("-10/(-99+10)")
 #print(x)
-x = floatify(x)
+#x = floatify(x)
 #print(x)
-x = simplify(x)
-print(x)
+#x = simplify(x)
+#print(x)
