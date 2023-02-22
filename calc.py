@@ -134,10 +134,3 @@ def solve_this(equation):
     equation_list = floatify(equation_list)
     answer = simplify(equation_list)
     return answer
-
-x = strToList("-10/(-99-1)")
-#print(x)
-x = floatify(x)
-#print(x)
-x = simplify(x)
-print(x)

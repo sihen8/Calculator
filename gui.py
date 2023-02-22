@@ -30,4 +30,3 @@ solve.pack()
 equation = solve.bind("<Button-1>", getEquation)
 
 window.mainloop()
-print(1)
