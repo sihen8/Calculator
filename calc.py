@@ -1,28 +1,28 @@
-def isFloat(n):
+def is_float(n):
     try:
         float(n)
-        return(True)
+        return (True)
     except ValueError:
         return False
 
-def strToList(equation):
 
+def strToList(equation):
     equation_list = []
     number = False
     last_term = ''
- 
+
     for i in range(len(equation)):
 
-        #TEST
-        #print("cycle: " + str(i))
-        #print("Last term: " + str(last_term))
-        #print("Last value was a number?: " + str(number))
-        #print(equation_list)
-        #print()
-        #TEST
+        # TEST
+        # print("cycle: " + str(i))
+        # print("Last term: " + str(last_term))
+        # print("Last value was a number?: " + str(number))
+        # print(equation_list)
+        # print()
+        # TEST
 
-        if isFloat(equation[i]) == True:
-            if number == True:                
+        if is_float(equation[i]) == True:
+            if number == True:
                 equation_list[len(equation_list) - 1] = str(last_term) + str(equation[i])
             else:
                 equation_list.append(str(equation[i]))
@@ -35,6 +35,7 @@ def strToList(equation):
             last_term = ""
             number = False
     return equation_list
+
 
 def floatify(equation_list):
     things_to_delete = 0
@@ -52,13 +53,10 @@ def floatify(equation_list):
                 equation_list[i] = "-" + equation_list[i + 1]
                 equation_list[i + 1] = "DELETE THIS"
                 things_to_delete += 1
-            elif isFloat(equation_list[i - 1]) == False and equation_list[i - 1] != "DELETE THIS":
+            elif is_float(equation_list[i - 1]) == False and equation_list[i - 1] != "DELETE THIS":
                 equation_list[i] = "-" + equation_list[i + 1]
                 equation_list[i + 1] = "DELETE THIS"
                 things_to_delete += 1
-
-
-
 
     counter = 0
     while things_to_delete != 0:
@@ -69,7 +67,7 @@ def floatify(equation_list):
         counter += 1
 
     for i in range(len(equation_list)):
-        if isFloat(equation_list[i]) == True:
+        if is_float(equation_list[i]) == True:
             equation_list[i] = float(equation_list[i])
     return equation_list
 
@@ -79,10 +77,10 @@ def simplify(equation_list):
     counter = 0
     while len(equation_list) != 1:
 
-        #print("pemdas: " + str(pemdas))
-        #print("counter: " + str(counter))
-        #print(equation_list)
-        #print()
+        # print("pemdas: " + str(pemdas))
+        # print("counter: " + str(counter))
+        # print(equation_list)
+        # print()
 
         if equation_list[counter] == '(':
             parenthesis = []
@@ -96,7 +94,6 @@ def simplify(equation_list):
             equation_list.pop(counter - 1)
             equation_list.pop(counter)
             counter = 0
-        
 
         if equation_list[counter] == '^' and pemdas == 1:
             equation_list[counter - 1] = equation_list[counter - 1] ** equation_list[counter + 1]
@@ -127,7 +124,8 @@ def simplify(equation_list):
             pemdas += 1
             counter = 0
         counter += 1
-    return(equation_list)
+    return equation_list
+
 
 def solve_this(equation):
     equation_list = strToList(equation)
@@ -135,9 +133,10 @@ def solve_this(equation):
     answer = simplify(equation_list)
     return answer
 
-x = strToList("-10/(-99-1)")
-#print(x)
-x = floatify(x)
-#print(x)
-x = simplify(x)
-print(x)
+
+# x = strToList("")
+# print(x)
+# x = floatify(x)
+# print(x)
+# x = simplify(x)
+# print(x)
